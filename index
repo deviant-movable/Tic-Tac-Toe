@@ -1,0 +1,47 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Welcome to the Guess the Number game!");
+        
+        // Generate a random number between 1 and 100
+        Random random = new Random();
+        int secretNumber = random.Next(1, 101);
+
+        int maxAttempts = 5;
+        int attempts = 0;
+
+        Console.WriteLine($"Try to guess the number between 1 and 100. You have {maxAttempts} attempts.");
+
+        while (attempts < maxAttempts)
+        {
+            Console.Write("Enter your guess: ");
+            if (int.TryParse(Console.ReadLine(), out int userGuess))
+            {
+                attempts++;
+
+                if (userGuess == secretNumber)
+                {
+                    Console.WriteLine($"Congratulations! You guessed the correct number {secretNumber} in {attempts} attempts.");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Wrong guess. Try again!");
+                    Console.WriteLine($"Attempts remaining: {maxAttempts - attempts}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        if (attempts == maxAttempts)
+        {
+            Console.WriteLine($"Sorry, you've run out of attempts. The correct number was {secretNumber}.");
+        }
+    }
+}
